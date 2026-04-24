@@ -1,0 +1,15 @@
+<div align="center">
+
+<h1 align="center">Login Admin</h1>
+<input align="center" type="text" placeholder="Username" id="username" #username/>
+<h1></h1>
+<input align="center" type="password" placeholder="Password" id="password" #pass/>
+<h1></h1>
+<button align="center" (click)="onLoginClick(username.value,pass.value)">Login</button>
+</div>
+<h1></h1>
+<h1></h1>
+<div align="center" onsubmit="loginUser()">
+<h1>login user</h1>
+<button align="center" type="submit">Login</button>
+</div>

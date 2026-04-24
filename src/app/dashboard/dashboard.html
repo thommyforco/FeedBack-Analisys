@@ -1,0 +1,50 @@
+<div class="container">
+    <header> 
+        <h1>📊 Smart feedback Analyzer</h1>
+        <button class= btnlogout (click)="logout()">Logout</button>
+    </header>
+    <div class="stats">
+        <div class="stat-card">
+            <span class="stat-number">{{feedbacks.length}}</span>
+            <span class="stat-label">Totale Feedback</span>
+        </div>
+
+        <div class="stat-card positivo">
+            <span class="stat-number">{{feedbacks | sentimentCount:'POSITIVO'}}</span>
+            <span class="stat-label">😊 Feedback Positivi</span>
+        </div>
+        <div class="stat-card negativo">
+            <span class="stat-number">{{feedbacks | sentimentCount:'NEGATIVO'}}</span>
+            <span class="stat-label">😞 Feedback Negativi</span>
+        </div>
+        <div class="stat-card neutro">
+            <span class="stat-number">{{feedbacks | sentimentCount:'NEUTRO'}}</span>
+            <span class="stat-label">😐 Feedback Neutri</span>
+        </div>
+
+
+    <div class="table-container">
+        <div *ngIf="isLoading" class="loading">Caricamento feedback...</div>
+        <div *ngIf="!isLoading && feedbacks.length === 0" class="no-data">Nessun feedback disponibile.</div>
+        <table *ngIf="!isLoading && feedbacks.length > 0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Testo</th>
+                    <th>Sentiment</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let feedback of feedbacks">
+                    <td>{{feedback.id}}</td>
+                    <td class="testo-cell">{{feedback.testo}}</td>
+                    <td> <span [class]="'badge' + getSentimentClass(feedback.sentiment)">{{feedback.sentiment}}</span></td>
+                    <td>{{feedback.categoria}}</td>
+                    <td>{{feedback.dataCreazione | date: 'dd/MM/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
